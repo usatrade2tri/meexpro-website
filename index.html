@@ -2,62 +2,117 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Site Search Example</title>
+  <title>MEEXPRO AI Search</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0d0d0d;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #00FFCC;
+      margin-bottom: 0.2em;
+    }
+
+    p {
+      font-size: 1.3em;
+      color: #CCCCCC;
+      margin-bottom: 1.5em;
+      text-align: center;
+      max-width: 600px;
+    }
+
+    .search-bar {
+      display: flex;
+      width: 80%;
+      max-width: 600px;
+      background-color: #1a1a1a;
+      border: 2px solid #00FFCC;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .search-bar input {
+      flex: 1;
+      padding: 1em;
+      font-size: 1em;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      color: #ffffff;
+    }
+
+    .search-bar button {
+      background-color: #00FFCC;
+      color: #0d0d0d;
+      border: none;
+      padding: 1em 1.5em;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .search-bar button:hover {
+      background-color: #00ccaa;
+    }
+
+    #results {
+      margin-top: 1em;
+      width: 80%;
+      max-width: 600px;
+      background-color: #1a1a1a;
+      border: 2px solid #00FFCC;
+      border-radius: 8px;
+      max-height: 200px;
+      overflow-y: auto;
+      padding: 1em;
+      color: #00FFCC;
+      font-size: 1.1em;
+      box-sizing: border-box;
+    }
+
+    #results ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    #results li {
+      padding: 0.5em 0;
+      border-bottom: 1px solid #004d44;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    #results li:hover {
+      background-color: #004d44;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 0.9em;
+      color: #666666;
+    }
+  </style>
 </head>
 <body>
-  <h1>My Site</h1>
+  <h1>MEEXPRO</h1>
+  <p>Next-gen AI search engine built to think with you.</p>
 
-  <input type="text" id="searchInput" placeholder="Search this site..." />
-
-  <ul id="searchResults"></ul>
-
-  <div id="content">
-    <article>
-      <h2>Apple</h2>
-      <p>Apples are sweet, crunchy fruits.</p>
-    </article>
-    <article>
-      <h2>Banana</h2>
-      <p>Bananas are yellow and rich in potassium.</p>
-    </article>
-    <article>
-      <h2>Cherry</h2>
-      <p>Cherries are small and red with a pit inside.</p>
-    </article>
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Ask your AI anything..." />
+    <button id="searchBtn">Search</button>
   </div>
 
-  <script>
-    const searchInput = document.getElementById('searchInput');
-    const resultsList = document.getElementById('searchResults');
-    const articles = Array.from(document.querySelectorAll('#content article'));
-
-    searchInput.addEventListener('input', () => {
-      const query = searchInput.value.toLowerCase();
-      resultsList.innerHTML = '';
-
-      if (!query) return;
-
-      const matchedArticles = articles.filter(article => {
-        const title = article.querySelector('h2').textContent.toLowerCase();
-        const text = article.querySelector('p').textContent.toLowerCase();
-        return title.includes(query) || text.includes(query);
-      });
-
-      if (matchedArticles.length === 0) {
-        resultsList.innerHTML = '<li>No results found.</li>';
-        return;
-      }
-
-      matchedArticles.forEach(article => {
-        const title = article.querySelector('h2').textContent;
-        const li = document.createElement('li');
-        li.textContent = title;
-        li.onclick = () => {
-          article.scrollIntoView({ behavior: 'smooth' });
-        };
-        resultsList.appendChild(li);
-      });
-    });
-  </script>
-</body>
-</html>
+  <div id="results" style="display:none;">
+    <ul id="resultsList"></ul>
