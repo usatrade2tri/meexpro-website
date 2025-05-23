@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MEEXPRO AI Search</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 100px; }
+  </style>
+</head>
+<body>
+  <h1>Welcome to MEEXPRO</h1>
+  <p>Your AI-powered search engine is coming soon!</p>
+</body>
+</html>
