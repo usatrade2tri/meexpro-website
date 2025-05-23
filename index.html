@@ -1,13 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>MEEXPRO AI Search</title>
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; margin-top: 100px; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0d0d0d;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #00FFCC;
+      margin-bottom: 0.2em;
+    }
+
+    p {
+      font-size: 1.3em;
+      color: #CCCCCC;
+      margin-bottom: 2em;
+    }
+
+    .search-bar {
+      display: flex;
+      width: 80%;
+      max-width: 600px;
+      background-color: #1a1a1a;
+      border: 2px solid #00FFCC;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .search-bar input {
+      flex: 1;
+      padding: 1em;
+      font-size: 1em;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      color: #ffffff;
+    }
+
+    .search-bar button {
+      background-color: #00FFCC;
+      color: #0d0d0d;
+      border: none;
+      padding: 1em 1.5em;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .search-bar button:hover {
+      background-color: #00ccaa;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 0.9em;
+      color: #666666;
+    }
   </style>
 </head>
 <body>
-  <h1>Welcome to MEEXPRO</h1>
-  <p>Your AI-powered search engine is coming soon!</p>
+  <h1>MEEXPRO</h1>
+  <p>Next-gen AI search engine built to think with you.</p>
+
+  <div class="search-bar">
+    <input type="text" placeholder="Ask your AI anything..." />
+    <button>Search</button>
+  </div>
+
+  <footer>© 2025 MEEXPRO</footer>
 </body>
 </html>
