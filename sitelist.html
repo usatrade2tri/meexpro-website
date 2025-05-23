@@ -1,100 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Top 1000 US Websites</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    padding: 1em;
-    background: #121212;
-    color: #e0e0e0;
-  }
-  input {
-    padding: 0.5em;
-    width: 100%;
-    max-width: 400px;
-    margin-bottom: 1em;
-    font-size: 1em;
-    border-radius: 5px;
-    border: none;
-  }
-  ul {
-    list-style: none;
-    padding-left: 0;
-    max-height: 70vh;
-    overflow-y: auto;
-    border: 1px solid #444;
-    border-radius: 5px;
-    background: #222;
-  }
-  li {
-    padding: 0.5em;
-    border-bottom: 1px solid #444;
-  }
-  li a {
-    color: #00bcd4;
-    text-decoration: none;
-  }
-  li:hover {
-    background-color: #333;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <title>MEEXPRO AI Search</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0d0d0d;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #00FFCC;
+      margin-bottom: 0.2em;
+    }
+
+    p {
+      font-size: 1.3em;
+      color: #CCCCCC;
+      margin-bottom: 1.5em;
+      text-align: center;
+      max-width: 600px;
+    }
+
+    .search-bar {
+      display: flex;
+      width: 80%;
+      max-width: 600px;
+      background-color: #1a1a1a;
+      border: 2px solid #00FFCC;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .search-bar input {
+      flex: 1;
+      padding: 1em;
+      font-size: 1em;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      color: #ffffff;
+    }
+
+    .search-bar button {
+      background-color: #00FFCC;
+      color: #0d0d0d;
+      border: none;
+      padding: 1em 1.5em;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .search-bar button:hover {
+      background-color: #00ccaa;
+    }
+
+    #results {
+      margin-top: 1em;
+      width: 80%;
+      max-width: 600px;
+      background-color: #1a1a1a;
+      border: 2px solid #00FFCC;
+      border-radius: 8px;
+      max-height: 300px;
+      overflow-y: auto;
+      padding: 1em;
+      color: #00FFCC;
+      font-size: 1.1em;
+      box-sizing: border-box;
+      display: none;
+    }
+
+    #results ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    #results li {
+      padding: 0.5em 0;
+      border-bottom: 1px solid #004d44;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    #results li:hover {
+      background-color: #004d44;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 0.9em;
+      color: #666666;
+    }
+  </style>
 </head>
 <body>
-<h1>Top 1000 US Websites</h1>
-<input type="text" id="search" placeholder="Search websites..." />
-<ul id="siteList"></ul>
+  <h1>MEEXPRO</h1>
+  <p>Next-gen AI search engine built to think with you.</p>
 
-<script>
-const websites = [
-  { name: "Google", url: "https://www.google.com" },
-  { name: "YouTube", url: "https://www.youtube.com" },
-  { name: "Facebook", url: "https://www.facebook.com" },
-  { name: "Amazon", url: "https://www.amazon.com" },
-  { name: "Wikipedia", url: "https://www.wikipedia.org" },
-  { name: "Twitter", url: "https://www.twitter.com" },
-  { name: "Instagram", url: "https://www.instagram.com" },
-  { name: "LinkedIn", url: "https://www.linkedin.com" },
-  { name: "Netflix", url: "https://www.netflix.com" },
-  { name: "Reddit", url: "https://www.reddit.com" },
-  { name: "Yahoo", url: "https://www.yahoo.com" },
-  { name: "eBay", url: "https://www.ebay.com" },
-  { name: "Bing", url: "https://www.bing.com" },
-  { name: "Pinterest", url: "https://www.pinterest.com" },
-  { name: "MSN", url: "https://www.msn.com" },
-  { name: "Tumblr", url: "https://www.tumblr.com" },
-  { name: "PayPal", url: "https://www.paypal.com" },
-  { name: "Etsy", url: "https://www.etsy.com" },
-  { name: "Twitch", url: "https://www.twitch.tv" },
-  { name: "Spotify", url: "https://www.spotify.com" }
-  // ... up to 1000 sites
-];
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Ask your AI anything..." />
+    <button id="searchBtn">Search</button>
+  </div>
 
-const siteList = document.getElementById('siteList');
-const searchInput = document.getElementById('search');
+  <div id="results">
+    <ul id="resultsList"></ul>
+  </div>
 
-function displaySites(list) {
-  siteList.innerHTML = '';
-  if (list.length === 0) {
-    siteList.innerHTML = '<li>No results found.</li>';
-    return;
-  }
-  list.forEach(site => {
-    const li = document.createElement('li');
-    li.innerHTML = `<a href="${site.url}" target="_blank" rel="noopener">${site.name}</a>`;
-    siteList.appendChild(li);
-  });
-}
+  <footer>© 2025 MEEXPRO</footer>
 
-searchInput.addEventListener('input', () => {
-  const query = searchInput.value.toLowerCase();
-  const filtered = websites.filter(site => site.name.toLowerCase().includes(query));
-  displaySites(filtered);
-});
+  <script>
+    const websites = [
+      { name: "Google", url: "https://www.google.com" },
+      { name: "YouTube", url: "https://www.youtube.com" },
+      { name: "Facebook", url: "https://www.facebook.com" },
+      { name: "Amazon", url: "https://www.amazon.com" },
+      { name: "Wikipedia", url: "https://www.wikipedia.org" },
+      { name: "Reddit", url: "https://www.reddit.com" },
+      { name: "Twitter (X)", url: "https://www.twitter.com" },
+      { name: "LinkedIn", url: "https://www.linkedin.com" },
+      { name: "Instagram", url: "https://www.instagram.com" },
+      { name: "Netflix", url: "https://www.netflix.com" }
+    ];
 
-// Initial load
-displaySites(websites);
-</script>
+    const input = document.getElementById('searchInput');
+    const button = document.getElementById('searchBtn');
+    const resultsContainer = document.getElementById('results');
+    const resultsList = document.getElementById('resultsList');
+
+    function searchSites() {
+      const query = input.value.toLowerCase().trim();
+      const filtered = websites.filter(site => site.name.toLowerCase().includes(query));
+
+      resultsList.innerHTML = '';
+
+      if (filtered.length === 0) {
+        resultsList.innerHTML = '<li>No results found.</li>';
+      } else {
+        filtered.forEach(site => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="${site.url}" target="_blank" style="color: #00FFCC;">${site.name}</a>`;
+          resultsList.appendChild(li);
+        });
+      }
+
+      resultsContainer.style.display = 'block';
+    }
+
+    button.addEventListener('click', searchSites);
+    input.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        searchSites();
+      }
+    });
+  </script>
 </body>
 </html>
